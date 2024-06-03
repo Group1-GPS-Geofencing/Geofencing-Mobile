@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!--
+    Author: sibongire nyirenda (Bsc-com-ne-07-18)
+    Last Modified on: 2-06-2024
+-->
+
+<!-- Root element is a CardView to give the item a card-like appearance -->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <!-- A LinearLayout to arrange its children in a horizontal row -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:padding="8dp">
+
+        <!-- ImageView to display an icon for the route -->
+        <ImageView
+            android:id="@+id/iconRoute"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.2"
+            android:src="@drawable/ic_tracking_48" />
+
+        <!-- TextView to display the name of the route -->
+        <TextView
+            android:id="@+id/routeName"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginStart="5dp"
+            android:layout_weight="0.7"
+            android:text="Route Name"
+            android:textSize="14sp" />
+
+        <!-- ImageView to display a "more options" icon -->
+        <ImageView
+            android:id="@+id/iconMore"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.1"
+            android:src="@drawable/ic_more_vert_24" />
+    </LinearLayout>
+</androidx.cardview.widget.CardView>
