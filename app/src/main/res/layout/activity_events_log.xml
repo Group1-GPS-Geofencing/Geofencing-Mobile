@@ -1,15 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 
-<!--
-    Author: sibongire nyirenda (Bsc-com-ne-07-18)
-    Last Modified on: 2-06-2024
--->
-
-<!-- Root LinearLayout -->
-<!-- Defines the root layout with vertical orientation, taking up the full width and height of the screen. -->
-<!-- The 'tools:context' attribute specifies the associated Kotlin activity for design-time tools. -->
-
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -19,6 +10,18 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     tools:context=".view.EventsLogActivity">
+
+    <!-- Toolbar with Back Button -->
+    <androidx.appcompat.widget.Toolbar
+        android:id="@+id/toolbarEditFence"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="?attr/colorPrimary"
+        android:elevation="4dp"
+        android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
+        app:navigationIcon="@drawable/ic_arrow_back_24"
+        app:title="Events Log"
+        app:titleTextColor="@color/white"/>
 
 
 </LinearLayout>

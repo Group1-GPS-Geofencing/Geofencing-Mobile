@@ -17,6 +17,8 @@ ktor = "2.3.11"
 maps = "18.2.0"
 secretsGradlePlugin = "2.0.1"
 simpleXml = "2.7.1"
+activity = "1.9.0"
+constraintlayout = "2.1.4"
 
 [libraries]
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
@@ -50,6 +52,8 @@ play-services-maps = { module = "com.google.android.gms:play-services-maps", ver
 room-compiler = { module = "androidx.room:room-compiler", version.ref = "room" }
 secrets-gradle-plugin = { module = "com.google.android.libraries.mapsplatform.secrets-gradle-plugin:secrets-gradle-plugin", version.ref = "secretsGradlePlugin" }
 simple-xml = { module = "org.simpleframework:simple-xml", version.ref = "simpleXml" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 
 [plugins]
 androidApplication = { id = "com.android.application", version.ref = "agp" }

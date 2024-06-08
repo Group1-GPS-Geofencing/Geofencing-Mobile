@@ -1,22 +1,33 @@
 package com.geofence.geofencing_mobile.view
 
 // Author: sibongire nyirenda (Bsc-com-ne-07-18)
-// Last Modified on: 2-06-2024
+// Last Modified by: James Kalulu (Bsc-com-ne-21-19)
 
 
-// Import necessary Android libraries.
 import android.os.Bundle
+import android.widget.ListView
 import androidx.appcompat.app.AppCompatActivity
 import com.geofence.geofencing_mobile.R
+import com.geofence.geofencing_mobile.controller.Controller
+import com.geofence.geofencing_mobile.model.entities.EventLog
+import com.geofence.geofencing_mobile.view.adapters.RoutesAdapter
 
-// EventsLogActivity is a screen within the application that displays logs related to events.
+/**
+ * EventsLogActivity displays a list of event logs.
+ */
 class EventsLogActivity : AppCompatActivity() {
 
-    // onCreate is called when the activity is first created.
+    private lateinit var listViewEventLogs: ListView
+    private lateinit var adapter: RoutesAdapter
+    private lateinit var controller: Controller
+    private var eventLogs: MutableList<EventLog> = mutableListOf()
+
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState The saved instance state.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Set the content view to the layout defined in activity_events_log.xml.
         setContentView(R.layout.activity_events_log)
     }
 }
