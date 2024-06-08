@@ -1,44 +1,150 @@
 package com.geofence.geofencing_mobile.view
 
 // Author: sibongire nyirenda (Bsc-com-ne-07-18)
-// Last Modified on: 2-06-2024
+// Last Modified by: James Kalulu (Bsc-com-ne-21-19)
 
 
-// Import necessary Android libraries.
+import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
+import android.widget.ListView
+import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.Toolbar
 import com.geofence.geofencing_mobile.R
+import com.geofence.geofencing_mobile.controller.Controller
+import com.geofence.geofencing_mobile.controller.RemoteRepository
+import com.geofence.geofencing_mobile.model.entities.Fence
+import com.geofence.geofencing_mobile.view.adapters.FenceAdapter
 import com.google.android.material.floatingactionbutton.FloatingActionButton
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
 
-// FencesActivity is a screen within the application that allows users to view and manage geofences.
+/**
+ * FencesActivity displays and manages a list of fences.
+ */
 class FencesActivity : AppCompatActivity() {
 
-    // onCreate is called when the activity is first created.
+    private lateinit var listViewFences: ListView
+    private lateinit var controller: Controller
+    private lateinit var adapter: FenceAdapter
+    private var fences: MutableList<Fence> = mutableListOf()
+
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState The saved instance state.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Set the content view to the layout defined in activity_fences.xml.
         setContentView(R.layout.activity_fences)
 
-        // Initialize the onClickListeners for the views.
+        listViewFences = findViewById(R.id.listViewFences)
+        controller = Controller(RemoteRepository())
+
+        // Set up the adapter for ListView with delete action handling
+        adapter = FenceAdapter(this, fences) { fence ->
+            // Handle delete action
+            // Launch a coroutine
+            CoroutineScope(Dispatchers.Main).launch {
+                deleteFence(fence)
+            }
+        }
+        listViewFences.adapter = adapter
+
+        // Fetch the list of fences from the database
+        fetchFences()
+
+        // Set click listeners for various UI elements
         setOnClickListeners()
     }
 
-    // Method to set onClickListeners for various views in the layout.
+    /**
+     * Sets onClickListeners for various views in the layout.
+     */
     private fun setOnClickListeners() {
-
-        // Set OnClickListener for the FloatingActionButton (FAB) to create a new fence.
         findViewById<FloatingActionButton>(R.id.fabCreateFence).setOnClickListener {
-            // Start the CreateFenceActivity when the FAB is clicked.
             startActivity(Intent(this, CreateFenceActivity::class.java))
         }
 
-        // Set OnClickListener for the toolbar navigation icon (back button).
         findViewById<Toolbar>(R.id.toolbarFences).setNavigationOnClickListener {
-            // Finish the current activity and go back to the previous activity when the navigation icon is clicked.
             finish()
         }
+
+        listViewFences.setOnItemClickListener { _, _, position, _ ->
+            val fence = fences[position]
+            // Start EditFenceActivity with the selected fence
+            val intent = Intent(this, EditFenceActivity::class.java).apply {
+                putExtra("fence", fence)
+            }
+            startActivity(intent)
+        }
     }
+
+    /**
+     * Called when the activity resumes.
+     * Refreshes the list of fences.
+     */
+    override fun onResume() {
+        super.onResume()
+        // Refresh the list of fences when the activity resumes
+        fetchFences()
+    }
+
+    /**
+     * fetches the list of fences from the controller.
+     */
+    private fun fetchFences() {
+        CoroutineScope(Dispatchers.Main).launch {
+            controller.fetchFences(
+                onSuccess = { fetchedFences ->
+                    fences.clear()
+                    adapter.addAll(fetchedFences)
+                    adapter.notifyDataSetChanged()
+                },
+                onError = { error ->
+                    Toast.makeText(this@FencesActivity, "Error fetching fences: ${error.message}", Toast.LENGTH_SHORT).show()
+                }
+            )
+        }
+    }
+
+    /**
+     * Deletes a fence from the database and updates the UI.
+     * @param fence The fence to be deleted.
+     */
+    private suspend fun deleteFence(fence: Fence) {
+        // Perform delete operation
+        controller.deleteFence(fence,
+            onSuccess = {
+                // Remove the fence from the list and notify the adapter
+                fences.remove(fence)
+                adapter.notifyDataSetChanged()
+                Toast.makeText(this, "Fence deleted successfully", Toast.LENGTH_SHORT).show()
+            },
+            onError = { error ->
+                // Handle error
+                Toast.makeText(this, "Error deleting fence: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        )
+    }
+
+    companion object {
+        private const val CREATE_FENCE_REQUEST_CODE = 1001
+    }
+
+    /**
+     * Called when an activity you launched exits, giving you the requestCode.
+     * @param requestCode The integer request code originally supplied to startActivityForResult(), allowing you to identify who this result came from.
+     * @param resultCode The integer result code returned by the child activity through its setResult().
+     * @param data An Intent, which can return result data to the caller (various data can be attached to Intent "extras").
+     */
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == CREATE_FENCE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
+            // Fence created successfully, refresh the list
+            fetchFences()
+        }
+    }
+
 }

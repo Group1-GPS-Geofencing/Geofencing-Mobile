@@ -1,25 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    tools:context=".view.CreateFenceActivity">
+    tools:context=".view.EditFenceActivity">
 
     <!-- Toolbar with Back Button -->
     <androidx.appcompat.widget.Toolbar
-        android:id="@+id/toolbarCreateFence"
+        android:id="@+id/toolbarEditFence"
         android:layout_width="match_parent"
         android:layout_height="?attr/actionBarSize"
         android:background="?attr/colorPrimary"
         android:elevation="4dp"
         android:theme="@style/ThemeOverlay.AppCompat.ActionBar"
         app:navigationIcon="@drawable/ic_arrow_back_24"
-        app:title="Create Fence"
+        app:title="Edit Fence"
         app:titleTextColor="@color/white"
         app:menu="@menu/menu_create_fence"/>
 
@@ -146,14 +143,14 @@
             android:textColor="@color/white"/>
 
         <Button
-            android:id="@+id/btn_save_fence"
+            android:id="@+id/btn_save_fence_edit"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:background="@color/light_blue"
             android:layout_weight="1"
             android:padding="5dp"
             android:layout_marginHorizontal="5dp"
-            android:text="Save Fence"
+            android:text="Save Fence Edit"
             android:textColor="@color/white"/>
 
     </LinearLayout>

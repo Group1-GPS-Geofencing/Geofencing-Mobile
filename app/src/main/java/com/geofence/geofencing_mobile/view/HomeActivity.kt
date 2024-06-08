@@ -1,31 +1,35 @@
 package com.geofence.geofencing_mobile.view
 
 // Author: sibongire nyirenda (Bsc-com-ne-07-18)
-// Last Modified on: 2-06-2024
+// Last Modified by: James Kalulu (Bsc-com-ne-21-19)
 
 
-// Import necessary Android libraries.
 import android.content.Intent
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.cardview.widget.CardView
 import com.geofence.geofencing_mobile.R
 
-// HomeActivity is the main screen of the application, showing different options using CardViews.
+/**
+ * HomeActivity is the main screen of the application, showing different options using CardViews.
+ */
 class HomeActivity : AppCompatActivity() {
 
-    // onCreate is called when the activity is first created.
+    /**
+     * Called when the activity is first created.
+     * @param savedInstanceState The saved instance state.
+     */
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-
-        // Set the content view to the layout defined in activity_home.xml.
         setContentView(R.layout.activity_home)
 
         // Initialize the onClickListeners for the CardViews.
         setOnClickListeners()
     }
 
-    // Method to set onClickListeners for each CardView in the layout.
+    /**
+     * Sets onClickListeners for each CardView in the layout.
+     */
     private fun setOnClickListeners() {
 
         // Set OnClickListener for the Fences CardView
