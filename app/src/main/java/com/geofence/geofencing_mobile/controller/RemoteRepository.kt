@@ -116,10 +116,19 @@ public class RemoteRepository {
      * Retrieves a list of all event logs from the server.
      * @return A list of event logs fetched from the server.
      */
-    suspend fun getEventLogs(): List<EventLog> {
-        Log.d(TAG, "Fetching event logs from the server")
-        return client.get("$urlString/logs").body()
+    suspend fun getEventLogs(
+        onSuccess: (List<EventLog>) -> Unit,
+        onError: (Throwable) -> Unit
+    ) {
+        try {
+            val fencesJsonString: String = client.get("$urlString/logs").body()
+            val eventLogs: List<EventLog> = json.decodeFromString(fencesJsonString)
+            onSuccess(eventLogs)
+        } catch (e: Throwable) {
+            onError(e)
+        }
     }
+
 
     /**
      * Deletes a specific event log from the server.

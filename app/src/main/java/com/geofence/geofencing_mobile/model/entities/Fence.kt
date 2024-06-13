@@ -83,7 +83,7 @@ data class Fence(
     @SerialName("boundary")
     val boundary: GeoJsonPolygon = GeoJsonPolygon.default(),
     @SerialName("is_active")
-    val isActive: Boolean
+    var isActive: Boolean
 ) : Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Long::class.java.classLoader) as? Long,

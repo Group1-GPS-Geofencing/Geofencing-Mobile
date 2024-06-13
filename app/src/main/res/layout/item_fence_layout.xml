@@ -21,7 +21,7 @@
         <LinearLayout
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:layout_weight="0.7"
+            android:layout_weight="0.6"
             android:orientation="vertical">
 
             <TextView
@@ -44,6 +44,15 @@
                 android:text="Fence Description"
                 android:textSize="14sp" />
         </LinearLayout>
+
+        <ImageView
+            android:id="@+id/iconFenceActive"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_weight="0.1"
+            android:src="@drawable/ic_fence_active_24"
+            android:visibility="gone"  />
 
         <ImageView
             android:id="@+id/iconFencesMore"

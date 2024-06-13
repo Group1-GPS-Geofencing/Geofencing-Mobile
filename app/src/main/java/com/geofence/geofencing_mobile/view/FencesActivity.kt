@@ -43,13 +43,18 @@ class FencesActivity : AppCompatActivity() {
         controller = Controller(RemoteRepository())
 
         // Set up the adapter for ListView with delete action handling
-        adapter = FenceAdapter(this, fences) { fence ->
-            // Handle delete action
-            // Launch a coroutine
-            CoroutineScope(Dispatchers.Main).launch {
-                deleteFence(fence)
+        adapter = FenceAdapter(this, fences,
+            onDelete = { fence ->
+                CoroutineScope(Dispatchers.Main).launch {
+                    deleteFence(fence)
+                }
+            },
+            onToggleActive = { fence ->
+                CoroutineScope(Dispatchers.Main).launch {
+                    toggleActiveFence(fence)
+                }
             }
-        }
+        )
         listViewFences.adapter = adapter
 
         // Fetch the list of fences from the database
@@ -145,6 +150,20 @@ class FencesActivity : AppCompatActivity() {
             // Fence created successfully, refresh the list
             fetchFences()
         }
+    }
+
+    private suspend fun toggleActiveFence(fence: Fence) {
+        fence.isActive = !fence.isActive
+        // Implement the activation/deactivation logic here
+        controller.updateFence(fence,
+            onSuccess = {
+                fetchFences()
+                Toast.makeText(this, "Fence status updated successfully", Toast.LENGTH_SHORT).show()
+            },
+            onError = { error ->
+                Toast.makeText(this, "Error updating fence status: ${error.message}", Toast.LENGTH_SHORT).show()
+            }
+        )
     }
 
 }

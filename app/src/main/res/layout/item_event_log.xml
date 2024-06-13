@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp">
+
+        <ImageView
+            android:id="@+id/event_log_icon"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_marginEnd="8dp"
+            android:layout_weight=".2"
+            android:src="@drawable/ic_notifications_24"/>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight=".4"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/event_log_header"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event Log Header"
+                android:textStyle="bold"
+                android:textSize="16sp"/>
+
+            <TextView
+                android:id="@+id/event_log_description"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Event log description"
+                android:textSize="14sp"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_weight=".3"
+            android:layout_gravity="end"
+            android:gravity="end"
+            android:layout_marginHorizontal="5dp">
+
+            <TextView
+                android:id="@+id/event_log_date"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Date"/>
+
+            <TextView
+                android:id="@+id/event_log_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Time"/>
+        </LinearLayout>
+
+
+        <ImageView
+            android:id="@+id/event_log_more"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:layout_weight=".1"
+            android:src="@drawable/ic_more_vert_24"/>
+    </LinearLayout>

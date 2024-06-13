@@ -23,5 +23,9 @@
         app:title="Events Log"
         app:titleTextColor="@color/white"/>
 
-
+    <!-- ListView to display event logs -->
+    <ListView
+        android:id="@+id/listViewEventLogs"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
 </LinearLayout>

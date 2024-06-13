@@ -150,14 +150,22 @@ class Controller(private val repository: RemoteRepository) {
      * @param onSuccess Callback function invoked when event logs are successfully fetched.
      * @param onError Callback function invoked when an error occurs during the fetch operation.
      */
+
     suspend fun fetchEventLogs(onSuccess: (List<EventLog>) -> Unit, onError: (Throwable) -> Unit) {
         try {
-            val eventLogs = repository.getEventLogs()
-            onSuccess(eventLogs)
+            repository.getEventLogs(
+                onSuccess = { fetchedEventLogs ->
+                    onSuccess(fetchedEventLogs)
+                },
+                onError = { error ->
+                    onError(error)
+                }
+            )
         } catch (e: Throwable) {
             onError(e)
         }
     }
+
 
     /**
      * Deletes a specific event log from the repository.

@@ -167,13 +167,37 @@ class EditFenceActivity : AppCompatActivity(), OnMapReadyCallback {
                     "Fence updated successfully",
                     Toast.LENGTH_SHORT
                 ).show()
-                finish()
+                // Set the edited fence to active
+                CoroutineScope(Dispatchers.Main).launch {
+                    setFenceActive(updatedFence)
+                }
             },
             onError = { error ->
                 // Handle error
                 Toast.makeText(
                     this@EditFenceActivity,
                     "Error updating fence: ${error.message}",
+                    Toast.LENGTH_SHORT
+                ).show()
+            }
+        )
+    }
+    /**
+     * Sets the edited fence to active.
+     * @param fence the edited fence to be set to active
+     */
+    private suspend fun setFenceActive(fence: Fence) {
+        fence.isActive = true
+        controller.updateFence(fence,
+            onSuccess = {
+                // Finish the activity after setting the fence to active
+                finish()
+            },
+            onError = { error ->
+                // Handle error
+                Toast.makeText(
+                    this@EditFenceActivity,
+                    "Error setting fence to active: ${error.message}",
                     Toast.LENGTH_SHORT
                 ).show()
             }

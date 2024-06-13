@@ -20,7 +20,8 @@ import com.geofence.geofencing_mobile.model.entities.Fence
 class FenceAdapter(
     context: Context,
     private val fences: MutableList<Fence>,
-    private val onDelete: (Fence) -> Unit
+    private val onDelete: (Fence) -> Unit,
+    private val onToggleActive: (Fence) -> Unit
 ) : ArrayAdapter<Fence>(context, 0, fences) {
 
     /**
@@ -38,6 +39,7 @@ class FenceAdapter(
         val fenceNameTextView = view.findViewById<TextView>(R.id.fenceName)
         val fenceDescriptionTextView = view.findViewById<TextView>(R.id.fenceDescription)
         val moreOptionsImageView = view.findViewById<ImageView>(R.id.iconFencesMore)
+        val activeIconImageView = view.findViewById<ImageView>(R.id.iconFenceActive)
 
         fenceNameTextView.text = fence.name
         fenceDescriptionTextView.text = fence.description
@@ -56,6 +58,20 @@ class FenceAdapter(
                 }
             }
             popupMenu.show()
+        }
+
+        if (fence.isActive) {
+            activeIconImageView.visibility = View.VISIBLE
+        } else {
+            activeIconImageView.visibility = View.INVISIBLE
+        }
+
+        // Handle the click event for active icon
+        activeIconImageView.setOnClickListener {
+            // Prevent the click event from propagating to the parent view
+            it.isClickable = true
+            it.isFocusable = true
+            onToggleActive(fence)
         }
 
         return view
