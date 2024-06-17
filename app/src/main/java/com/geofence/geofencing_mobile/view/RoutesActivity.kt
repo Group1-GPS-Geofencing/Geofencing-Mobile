@@ -4,7 +4,6 @@ package com.geofence.geofencing_mobile.view
 // Last Modified by: James Kalulu (Bsc-com-ne-21-19)
 
 
-import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.widget.ListView
@@ -75,7 +74,7 @@ class RoutesActivity : AppCompatActivity() {
         listViewRoutes.setOnItemClickListener { _, _, position, _ ->
             val route = routes[position]
             // Start EditFenceActivity with the selected route
-            val intent = Intent(this, EditFenceActivity::class.java).apply {
+            val intent = Intent(this, RouteViewActivity::class.java).apply {
                 putExtra("route", route)
             }
             startActivity(intent)
@@ -138,23 +137,4 @@ class RoutesActivity : AppCompatActivity() {
         )
     }
 
-    // Constant for the create fence request code
-    companion object {
-        private const val CREATE_FENCE_REQUEST_CODE = 1001
-    }
-
-
-    /**
-     * Called when an activity you launched exits, giving you the requestCode.
-     * @param requestCode The integer request code originally supplied to startActivityForResult(), allowing you to identify who this result came from.
-     * @param resultCode The integer result code returned by the child activity through its setResult().
-     * @param data An Intent, which can return result data to the caller (various data can be attached to Intent "extras").
-     */
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        if (requestCode == CREATE_FENCE_REQUEST_CODE && resultCode == Activity.RESULT_OK) {
-            // Fence created successfully, refresh the list
-            fetchRoutes()
-        }
-    }
 }
