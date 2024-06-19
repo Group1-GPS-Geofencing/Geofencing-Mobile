@@ -56,3 +56,9 @@ google-services.json
 /.gitignore
 
 secrets.properties
+
+# Ignore SignIn activity file
+./Geofencing-Mobile/app/src/main/java/com/geofence/geofencing_mobile/view/SignIn.kt
+
+# Ignore activity_sign_in.xml file
+./Geofencing-Mobile/app/src/main/res/layout/activity_sign_in.xml
