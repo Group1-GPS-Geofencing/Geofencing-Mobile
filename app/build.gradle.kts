@@ -4,6 +4,7 @@ plugins {
     id("kotlin-kapt")
     id("com.google.android.libraries.mapsplatform.secrets-gradle-plugin")
     id("org.jetbrains.kotlin.plugin.serialization") version "2.0.0"
+    alias(libs.plugins.googleGmsGoogleServices)
 }
 
 android {
@@ -85,6 +86,9 @@ dependencies {
     implementation(libs.androidx.room.runtime)
     implementation(libs.androidx.activity)
     implementation(libs.androidx.constraintlayout)
+    implementation(libs.firebase.auth.ktx)
+    implementation(libs.firebase.database.ktx)
+    implementation(libs.firebase.auth)
     kapt(libs.room.compiler)
     implementation(libs.play.services.maps)
 

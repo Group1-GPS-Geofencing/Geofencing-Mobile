@@ -40,7 +40,7 @@ class SplashScreen : AppCompatActivity() {
 
         // Delay the start of the main activity (HomeActivity) by 2000 milliseconds (2 seconds).
         Handler(Looper.getMainLooper()).postDelayed({
-            startActivity(Intent(this, HomeActivity::class.java))
+            startActivity(Intent(this, SignUp::class.java))
             finish()
         }, 2000)
     }
