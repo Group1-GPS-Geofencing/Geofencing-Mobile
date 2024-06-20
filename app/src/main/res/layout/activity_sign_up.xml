@@ -35,7 +35,8 @@
         android:layout_height="20dp"
         android:paddingRight="300dp"
         android:text="Firstname"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start"
         android:textSize="17dp"
         android:textStyle="bold" />
 
@@ -57,7 +58,8 @@
         android:layout_height="20dp"
         android:paddingRight="300dp"
         android:text="Surname"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start"
         android:textSize="17dp"
         android:textStyle="bold" />
 
@@ -79,7 +81,8 @@
         android:layout_height="20dp"
         android:paddingRight="340dp"
         android:text="Email"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start"
         android:textSize="17dp"
         android:textStyle="bold" />
 
@@ -101,7 +104,8 @@
         android:layout_height="20dp"
         android:paddingRight="300dp"
         android:text="Password"
-        android:textAlignment="center"
+        android:textAlignment="viewStart"
+        android:layout_gravity="start"
         android:textSize="17dp"
         android:textStyle="bold" />
 
@@ -133,6 +137,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:text="Already have an account? Sign in" />
+        android:text="Already have an account? sign in"
+       />
+
 
 </LinearLayout>
