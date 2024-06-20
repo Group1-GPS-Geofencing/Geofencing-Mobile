@@ -18,13 +18,8 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DatabaseReference
 import com.google.firebase.database.FirebaseDatabase
 
-/**
- * author Bridget faindani
- * created: 19-06-24
- * Sign up activity for authentication of the application
- */
 class SignUp : AppCompatActivity() {
-//
+
     private lateinit var firstname: EditText
     private lateinit var surname: EditText
     private lateinit var email: EditText
@@ -105,20 +100,12 @@ class SignUp : AppCompatActivity() {
         }
     }
 
-    /**
-     * for registering the user
-     * Attempt to create user with email and password using Firebase Authentication
-     * Save user data under "Users" node with the current user's UID as the key
-     * Navigate to HomeActivity after successful registration
-     * Dismiss the progress dialog on authentication failure
-     */
     private fun registerUser(firstname: String, surname: String, email: String, password: String) {
         pd.setMessage("Please Wait!")
         pd.show()
 
         mAuth.createUserWithEmailAndPassword(email, password)
             .addOnSuccessListener(this@SignUp, OnSuccessListener<AuthResult> { authResult ->
-                //If user creation is successful, log and proceed to save user data to Firebase Realtime Database
                 Log.d("SignUp", "User created successfully")
                 val map = HashMap<String, Any>()
                 map["firstname"] = firstname
@@ -127,7 +114,7 @@ class SignUp : AppCompatActivity() {
                 map["id"] = mAuth.currentUser!!.uid
                 map["bio"] = ""
                 map["imageurl"] = "default"
-//Save user data under "Users" node with the current user's UID as the key
+
                 mRootRef.child("Users").child(mAuth.currentUser!!.uid).setValue(map)
                     .addOnCompleteListener { task ->
                         pd.dismiss()  // Ensure pd is dismissed
@@ -135,7 +122,7 @@ class SignUp : AppCompatActivity() {
                             Log.d("SignUp", "User data saved successfully")
                             Toast.makeText(
                                 this@SignUp,
-                                "Update the profile for better experience",
+                                "welcome,keep track of your routes!!",
                                 Toast.LENGTH_SHORT
                             ).show()
                             val intent = Intent(this@SignUp, HomeActivity::class.java)

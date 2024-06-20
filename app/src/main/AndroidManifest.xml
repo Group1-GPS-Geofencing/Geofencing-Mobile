@@ -21,6 +21,14 @@
             android:exported="false"
             android:theme="@style/AppThemeNoActionBar" />
         <activity
+            android:name=".view.SignUp"
+            android:exported="false"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity
+            android:name=".view.SignIn"
+            android:exported="false"
+            android:theme="@style/AppThemeNoActionBar"/>
+        <activity
             android:name=".view.RouteViewActivity"
             android:exported="false"
             android:theme="@style/AppThemeNoActionBar" />

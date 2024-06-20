@@ -34,9 +34,9 @@
         android:layout_width="390dp"
         android:layout_height="20dp"
         android:paddingRight="300dp"
-        android:text="Firstname"
-        android:textAlignment="viewStart"
         android:layout_gravity="start"
+        android:textAlignment="viewStart"
+        android:text="Firstname"
         android:textSize="17dp"
         android:textStyle="bold" />
 
@@ -58,8 +58,8 @@
         android:layout_height="20dp"
         android:paddingRight="300dp"
         android:text="Surname"
-        android:textAlignment="viewStart"
         android:layout_gravity="start"
+        android:textAlignment="viewStart"
         android:textSize="17dp"
         android:textStyle="bold" />
 
@@ -81,8 +81,8 @@
         android:layout_height="20dp"
         android:paddingRight="340dp"
         android:text="Email"
-        android:textAlignment="viewStart"
         android:layout_gravity="start"
+        android:textAlignment="viewStart"
         android:textSize="17dp"
         android:textStyle="bold" />
 
@@ -104,8 +104,8 @@
         android:layout_height="20dp"
         android:paddingRight="300dp"
         android:text="Password"
-        android:textAlignment="viewStart"
         android:layout_gravity="start"
+        android:textAlignment="viewStart"
         android:textSize="17dp"
         android:textStyle="bold" />
 
@@ -127,7 +127,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="15sp"
         android:background="@drawable/button_background"
-        android:minHeight="48dp"
+        android:minHeight="40dp"
         android:padding="10dp"
         android:text="Sign Up"
         tools:ignore="TouchTargetSizeCheck" />
@@ -135,10 +135,11 @@
     <TextView
         android:id="@+id/login_user"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="15dp"
-        android:text="Already have an account? sign in"
-       />
-
+        android:layout_height="30dp"
+        android:padding="1dp"
+        android:textAlignment="center"
+        android:textStyle="normal"
+        android:text="Already have an account? Sign in"
+        android:textSize="15sp" />
 
 </LinearLayout>
