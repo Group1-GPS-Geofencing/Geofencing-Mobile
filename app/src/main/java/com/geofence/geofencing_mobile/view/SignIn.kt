@@ -12,7 +12,6 @@ import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
 import com.geofence.geofencing_mobile.R
-import com.geofence.geofencing_mobile.R.id.sign_up_user
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 

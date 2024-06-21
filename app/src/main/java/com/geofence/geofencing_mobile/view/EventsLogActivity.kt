@@ -35,18 +35,22 @@ class EventsLogActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_events_log)
+        setOnClickListeners()
 
         // Initialize the ListView and set its adapter
         listViewEventLogs = findViewById(R.id.listViewEventLogs)
-        adapter = EventLogAdapter(this, eventLogs)
-        listViewEventLogs.adapter = adapter
-
-        // Initialize the controller and fetch event logs
         controller = Controller(RemoteRepository())
-        fetchEventLogs()
 
-        setOnClickListeners()
+        adapter = EventLogAdapter(this, eventLogs) { log ->
+            // Launch a coroutine to handle eventLog deletion
+            CoroutineScope(Dispatchers.Main).launch {
+                deleteLog(log)
+            }
+        }
+        listViewEventLogs.adapter = adapter
+        fetchEventLogs()
     }
+
 
     /**
      * Sets onClickListeners for various views in the layout.
@@ -73,5 +77,31 @@ class EventsLogActivity : AppCompatActivity() {
                 }
             )
         }
+    }
+
+    /**
+     * Deletes an eventLog from the database and updates the UI.
+     * @param log The log to be deleted.
+     */
+    private suspend fun deleteLog(log: EventLog) {
+        // Perform delete operation
+        controller.deleteEventLog(log,
+            onSuccess = {
+                // Remove the log from the list and notify the adapter
+                eventLogs.remove(log)
+                adapter.notifyDataSetChanged()
+                // Show success message
+                Toast.makeText(this, "Log deleted successfully", Toast.LENGTH_SHORT).show()
+            },
+            onError = { error ->
+                // Show error message if deleting route fails
+                Toast.makeText(
+                    this,
+                    "Error deleting log: ${error.message}",
+                    Toast.LENGTH_SHORT
+                )
+                    .show()
+            }
+        )
     }
 }
